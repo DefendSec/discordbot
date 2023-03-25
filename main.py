@@ -58,7 +58,7 @@ async def on_message(message):
         #await message.channel.send(f"<@{message.author.id}> has been permanently banned for posting a meme in <#{(message.channel.id)}>")
 
         embedVar = discord.Embed(color=0x00ff00)
-        embedVar.add_field(name = "a", value=f"***{message.author} was banned.*** **Reason:** ***meme in {client.get_channel(message.channel.id)}***", inline=True)
+        embedVar.add_field(name = "***{message.author} was banned.*** **Reason:** ***meme in {client.get_channel(message.channel.id)}***", inline=True)
         await message.channel.send(embed=embedVar)
 
 
