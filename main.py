@@ -1,6 +1,16 @@
 import discord
+import re
 
-client = discord.Client(intents=discord.Intents.default())
+# For regex
+url_pattern = re.compile(r'https?://\S+')
+
+
+
+# Idk what this does, but it only worked when I copy pasted it
+intents = discord.Intents.default()
+intents.message_content = True
+
+client = discord.Client(intents=intents)
 
 
 @client.event
@@ -9,17 +19,47 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    print(message.content)
-    #if message.channel.id == 1087310970700967947 and message.attachments:
+    # When msg is from ourselves
+    if message.author == client.user:
+        return
+
+    # print(message.content)
+    # Check if channel is general
+    if message.channel.id != 1087310970700967947:
+        return
     
-    print (message.attachments)
+    ############################
+    # IMAGE CHECKING
+    ############################
+
+    has_image = False
+
+    # Check for attachments
+    if message.attachments:
+
+        # Check if msg has an img attached
+        for attachment in message.attachments:
+            if attachment.filename.lower().endswith(('.png', '.jpeg', '.jpg', '.gif')):
+                has_image = True
+            
+                               
+    # Check for Image link
+    if url_pattern.search(message.content):
+        url = url_pattern.search(message.content).group(0)
+        # Check if the URL ends with a valid image file extension
+        if any(url.endswith(extension) for extension in ('.png', '.jpg', '.jpeg', '.gif')):
+            has_image = True
 
 
 
-    for attachment in message.attachments:
-        print("\n here")
-        if attachment.filename.lower().endswith(('.png', '.jpeg', '.jpg', '.gif')):
-            print(f"{message.author} uploaded an image in {message.channel}:\n{attachment.url}")
+    if has_image:
+        #Has image
+        print(f"{message.author} uploaded an image in {message.channel}")
+        #await message.channel.send(f"<@{message.author.id}> has been permanently banned for posting a meme in <#{(message.channel.id)}>")
+
+        embedVar = discord.Embed(color=0x00ff00)
+        embedVar.add_field(name = "a", value=f"***{message.author} was banned.*** **Reason:** ***meme in {client.get_channel(message.channel.id)}***", inline=True)
+        await message.channel.send(embed=embedVar)
 
 
 
