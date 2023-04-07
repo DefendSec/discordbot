@@ -1,2 +1,2 @@
-# discord-bot-dev
-Same as DefendSec/discord-bot but with actual token
+# discord-bot
+Public release, directly pushed from DefendSec/discord-bot-dev
