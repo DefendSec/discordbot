@@ -8,9 +8,11 @@ import re
 # All channel ids that the bot should look at here
 # Seperate with comma
 channel_id = [1087310970700967947]
+# replace this
 #
-#
-token = "MTA4ODk0MDYyODk3ODcxMjY4Ng.GJgYKG.zYFzkk57mS5bcwNX1B4w-uP9A69Uqr798V5BG4"
+# When it shows my token, then you are fired
+token = "MTA4ODk0MDYyODk3ODcxMjY4Ng.GLJld0.S9qsXMCeJXVjESTs-JrW2MB2Dh9y1iv3n3g7c0"
+
 
 
 
