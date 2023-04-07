@@ -1,6 +1,19 @@
 import discord
 import re
 
+
+
+####################################################################
+# Config here
+# All channel ids that the bot should look at here
+# Seperate with comma
+channel_id = [1087310970700967947]
+#
+#
+token = "MTA4ODk0MDYyODk3ODcxMjY4Ng.GLJld0.S9qsXMCeJXVjESTs-JrW2MB2Dh9y1iv3n3g7c0"
+
+
+
 # For regex
 url_pattern = re.compile(r'https?://\S+')
 
@@ -11,6 +24,8 @@ intents = discord.Intents.default()
 intents.message_content = True
 
 client = discord.Client(intents=intents)
+
+
 
 
 @client.event
@@ -53,16 +68,19 @@ async def on_message(message):
 
 
     if has_image:
-        #Has image
-        print(f"{message.author} uploaded an image in {message.channel}")
-        #await message.channel.send(f"<@{message.author.id}> has been permanently banned for posting a meme in <#{(message.channel.id)}>")
+        # Has image
 
-        embedVar = discord.Embed(title=f"*{message.author} was banned.* Reason: *meme in {client.get_channel(message.channel.id)}*", color=0x00ff00)
+        # Debug
+        print(f"{message.author} uploaded an image in {message.channel}")
+        
+        # Ban message to server
+        embedVar = discord.Embed(description=f"***{message.author} was banned. Reason: meme in {client.get_channel(message.channel.id)}***", color=0x43b582)
         await message.channel.send(embed=embedVar)
 
-        embedVar = discord.Embed(title=f"You have been banned from {message.guild.name} for posting a meme in {client.get_channel(message.channel.id)}", color=0x00ff00)
+        # Ban message to DM
+        embedVar = discord.Embed(title=f"You have been banned from {message.guild.name} for posting a meme in {client.get_channel(message.channel.id)}", color=0x43b582)
         await message.author.send(embed=embedVar)
 
 
 
-client.run('MTA4ODk0MDYyODk3ODcxMjY4Ng.GfHuS4.N8UNttdj5fRKKAdFSx1_y6PFrrHi0pXIjeSOZU')
+client.run(token)
