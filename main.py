@@ -1,17 +1,15 @@
 import discord
 import re
-
+import json
 
 
 ####################################################################
 # Config here
-# All channel ids that the bot should look at here
-# Seperate with comma
-channel_id = [1087310970700967947]
-# replace this
-#
-# When it shows my token, then you are fired
-token = "MTA4ODk0MDYyODk3ODcxMjY4Ng.GLJld0.S9qsXMCeJXVjESTs-JrW2MB2Dh9y1iv3n3g7c0"
+
+with open("config.json", "r") as f:
+    config = json.load(f)
+    token = config["token"]
+    channel_id = config["channel_id"]
 
 
 
@@ -42,7 +40,7 @@ async def on_message(message):
 
     # print(message.content)
     # Check if channel is general
-    if message.channel.id != 1087310970700967947:
+    if message.channel.id not in channel_id:
         return
     
     ############################
@@ -68,7 +66,8 @@ async def on_message(message):
             has_image = True
 
 
-
+    #########
+    # Warn message
     if has_image:
         # Has image
 
