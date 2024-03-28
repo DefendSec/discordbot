@@ -1,6 +1,6 @@
 # discord-bot
 
-A funi Discord bot that sends a fake ban message when someone posts a meme in a specified channel.
+Sends a fake ban message when someone posts a meme in a specified channel.
 
 ## Config
 
